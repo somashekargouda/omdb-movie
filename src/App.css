@@ -1,0 +1,31 @@
+.card {
+  width: 200px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 250px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.card > img {
+  width: 100%;
+}
+.next {
+  margin-left: 80%;
+}
+
+.search-input{
+  height: 30px;
+  margin-left: 10px;
+  border: 2px solid black;
+}
