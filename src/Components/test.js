@@ -7,30 +7,37 @@ const setup = () => render(<Movies />);
 
 describe("Testing Movies Component", () => {
   //for the search field
-  it("Register search field renders", () => {
+  it("Movie search field renders", () => {
     setup();
     const form = screen.getByTestId("searchField");
     expect(form).toBeInTheDocument();
   });
 
   //for the search button
-  it("Register Search button renders", () => {
+  it("Movie Search button renders", () => {
     setup();
     const form = screen.getByTestId("searchBtn");
     expect(form).toBeInTheDocument();
   });
 
   //for the pagination
-  it("Register next pagination renders", () => {
+  it("Movie next pagination button renders", () => {
     setup();
     const form = screen.getByTestId("paginationBtn");
     expect(form).toBeInTheDocument();
   });
 
   //for the displaying of cards
-  it("Register Display Cards", () => {
+  it("Movie Display Cards", () => {
     setup();
     const form = screen.getByTestId("searchField");
+    expect(form).toBeInTheDocument();
+  });
+
+  //for watchlist button
+  it("Movie Watchlist button", () => {
+    setup();
+    const form = screen.getByTestId("watchlistBtn");
     expect(form).toBeInTheDocument();
   });
 });

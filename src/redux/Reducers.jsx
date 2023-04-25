@@ -1,3 +1,4 @@
+//Intital state of the store
 const initialState = {
   movies: [],
 };

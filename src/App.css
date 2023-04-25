@@ -24,8 +24,9 @@
   margin-left: 80%;
 }
 
-.search-input{
+.search-input {
   height: 30px;
+  width: 210px;
   margin-left: 10px;
   border: 2px solid black;
 }

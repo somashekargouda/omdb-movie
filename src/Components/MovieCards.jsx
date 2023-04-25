@@ -6,23 +6,32 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+//Movie card item component using Material UI
 const MovieCards = (props) => {
   return (
     <Card sx={{ padding: "10px", marginTop: "10px", width: "280px" }}>
-      <CardMedia sx={{ height: 190 }} image={props.Poster} />
+      <CardMedia sx={{ height: 190 }} image={props.item.Poster} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.Title}
+          {props.item.Title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.Type}
+          {props.item.Type}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.Year}
+          {props.item.Year}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add to watchlist</Button>
+        {props.onDisableBtn && (
+          <Button
+            size="small"
+            variant="outlined"
+            onClick={() => props.onWishList(props.item)}
+          >
+            Add to watchlist
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
