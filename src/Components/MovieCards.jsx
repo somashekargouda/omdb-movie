@@ -6,8 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const MovieCards = (props) => {l
-  console.log(props);
+const MovieCards = (props) => {
   return (
     <Card sx={{ padding: "10px", marginTop: "10px", width: "280px" }}>
       <CardMedia sx={{ height: 190 }} image={props.Poster} />
