@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
+import Badge from "@mui/material/Badge";
 import MovieCards from "./MovieCards";
 import WatchlistModal from "./WatchlistModal";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,8 +14,7 @@ function Movies() {
   const [searchText, setsearchText] = useState("");
   const [filteredMovies, setfilteredMovies] = useState([]);
   const [pageCount, setPageCount] = useState(1);
-  const [openWishList, setWishListOpen] = useState(false);
-  const handleClose = () => setWishListOpen(false);
+  const [openWatchList, setOpenWatchList] = useState(false);
 
   //gets the watchlist
   const movies = useSelector((state) => state.movies);
@@ -36,10 +36,21 @@ function Movies() {
   }
 
   //dispatches movies and adds to the store
-  const onWishList = (movie) => {
+  const onWatchlist = (movie, movieToRemove) => {
     let allMovie = [...movies];
+    if (movieToRemove) {
+      allMovie = movies.filter(
+        (movie) => movie.imdbID !== movieToRemove.imdbID
+      );
+      dispatch(fetch_movies(allMovie));
+      return;
+    }
     allMovie.push(movie);
     dispatch(fetch_movies(allMovie));
+  };
+
+  const isWatchListed = (id) => {
+    return movies?.find((movie) => movie.imdbID === id);
   };
 
   return (
@@ -50,13 +61,15 @@ function Movies() {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Movies
             </Typography>
-            <Button
-              id="watchlistBtn"
-              onClick={() => setWishListOpen(true)}
-              variant="contained"
-            >
-              Watchlist
-            </Button>
+            <Badge badgeContent={movies.length} color="secondary">
+              <Button
+                id="watchlistBtn"
+                onClick={() => setOpenWatchList(true)}
+                variant="contained"
+              >
+                Watchlist
+              </Button>
+            </Badge>
           </Toolbar>
         </AppBar>
 
@@ -96,22 +109,23 @@ function Movies() {
         </Button>
       </div>
       <div className="movie-list">
-        {filteredMovies &&
-          filteredMovies.map((item) => {
-            return (
-              <MovieCards
-                key={item.imdbID}
-                item={item}
-                onWishList={onWishList}
-                onDisableBtn
-              />
-            );
-          })}
+        {filteredMovies?.map((item) => {
+          return (
+            <MovieCards
+              key={item.imdbID}
+              item={item}
+              onWatchlist={onWatchlist}
+              onDisableBtn
+              isWatchListed={isWatchListed(item.imdbID)}
+            />
+          );
+        })}
       </div>
       <WatchlistModal
-        openWishList={openWishList}
-        handleClose={handleClose}
+        openWatchList={openWatchList}
+        handleClose={() => setOpenWatchList(false)}
         movies={movies}
+        onWatchlist={onWatchlist}
       />
     </React.Fragment>
   );

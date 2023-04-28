@@ -29,7 +29,7 @@ export default function BasicModal(props) {
   return (
     <div>
       <Modal
-        open={props.openWishList}
+        open={props.openWatchList}
         onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
@@ -52,7 +52,7 @@ export default function BasicModal(props) {
               <MovieCards
                 key={movie.imdbID}
                 item={movie}
-                onWishList={() => {}}
+                onWatchlist={props.onWatchlist}
               />
             );
           })}

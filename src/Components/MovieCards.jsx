@@ -23,15 +23,25 @@ const MovieCards = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        {props.onDisableBtn && (
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => props.onWishList(props.item)}
-          >
-            Add to watchlist
-          </Button>
-        )}
+        <Button
+          size="small"
+          variant="contained"
+          color={
+            props.isWatchListed || !props.onDisableBtn ? "error" : "primary"
+          }
+          onClick={() =>
+            props.onWatchlist(
+              props.item,
+              !props.onDisableBtn ? props.item : props.isWatchListed
+            )
+          }
+        >
+          {props.isWatchListed || !props.onDisableBtn ? (
+            <span>Remove from WatchList</span>
+          ) : (
+            <span>Add to watchlist</span>
+          )}
+        </Button>
       </CardActions>
     </Card>
   );
