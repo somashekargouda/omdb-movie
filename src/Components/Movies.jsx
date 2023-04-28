@@ -93,13 +93,14 @@ function Movies() {
           }}
           variant="contained"
         >
-          Search
+          Search  
         </Button>
 
         <Button
           style={{ marginTop: "20px", marginLeft: "1100px" }}
           id="paginationBtn"
           className="next"
+          disabled={filteredMovies.length === 0 ? true : false}
           onClick={() => {
             handleNext();
           }}
